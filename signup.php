@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 include('connection.php');
 
 $username = $_POST['username'];
@@ -75,6 +76,7 @@ if (empty($email)) {
         $query->bind_param('sssss', $first_name,$last_name,$username,$hashed_password, $email);
         $query->execute();
         $response['status'] = "success";
+        $response ['email']= $email;
     }
 
 }
