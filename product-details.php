@@ -1,6 +1,6 @@
 <?php
 include('connection.php');
-
+header("Access-Control-Allow-Origin: *");
 $product_id = $_GET['product_id'];
 
 $query = $mysqli -> prepare('select name,image,description,price,quantity from products where id =?');

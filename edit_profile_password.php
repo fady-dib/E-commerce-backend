@@ -1,5 +1,5 @@
 <?php
-
+header("Access-Control-Allow-Origin: *");
 // -----------------get old password of user in database
 $old_password = $mysqli->prepare('select password from users where id=?');
 $old_password->bind_param('i', $id);

@@ -1,6 +1,6 @@
 <?php
 include('connection.php');
-
+header("Access-Control-Allow-Origin: *");
 // automatically gets the id from js
 $id = $_GET['id'];
 
