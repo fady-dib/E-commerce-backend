@@ -2,9 +2,9 @@
 include('connection.php');
 
 $id = $_POST['id'];
-$username = $_POST['username'];
-$password = $_POST['password'];
-$new_password = $_POST['new_password'];
+// $username = $_POST['username'];
+// $password = $_POST['password'];
+// $new_password = $_POST['new_password'];
 $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
 $email  = $_POST['email'];
@@ -27,15 +27,19 @@ $old_email->bind_param('i', $id);
 $old_email->execute();
 $old_email->store_result();
 
-$hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
 
 if( $old_email != $email){
 if ($email_exists > 0) {
     $response['status'] = "failed";
 } }
-    $query = $mysqli->prepare('update users set first_name = ?,last_name= ?,username= ?,password= ?,email= ?,street_address= ?,country= ?,city= ?,phone_number= ?,landline_number = ? where id = ?');
-    $query->bind_param('ssssssssssi', $first_name,$last_name,$username,$hashed_password, $email,$street_address,$country,$city,$phone_number,$landline_number,$id);
+if($first_name != null && $last_name != null && $email != null ){
+    $query = $mysqli->prepare('update users set first_name = ?,last_name= ?,email= ?,street_address= ?,country= ?,city= ?,phone_number= ?,landline_number = ? where id = ?');
+    $query->bind_param('ssssssssi', $first_name,$last_name,$email,$street_address,$country,$city,$phone_number,$landline_number,$id);
     $query->execute();
     $response['status'] = "success";
+}else{
+    $response['status'] = "failed, basic info missing";
+}
 
     echo json_encode($response);
