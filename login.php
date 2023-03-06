@@ -10,7 +10,7 @@ $query->execute();
 
 $query->store_result();
 $num_rows = $query->num_rows();
-$query->bind_result($id, $username, $first_name,$last_name,$username,$password, $email);
+$query->bind_result($id, $first_name,$last_name,$username,$hashed_password, $email);
 $query->fetch();
 $response = [];
 if ($num_rows == 0) {
@@ -22,6 +22,8 @@ if ($num_rows == 0) {
         $response['username'] = $username;
         $response['first_name'] = $first_name;
         $response['last_name'] = $last_name;
+        $response['email'] = $email;
+
     } else {
         $response["response"] = "Incorrect password";
     }
