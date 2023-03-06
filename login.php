@@ -4,13 +4,13 @@ include('connection.php');
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-$query = $mysqli->prepare('select id,username,password,first_name,last_name from users where username=?');
+$query = $mysqli->prepare('select id,first_name,last_name,username,password, email from users where username=?');
 $query->bind_param('s', $username);
 $query->execute();
 
 $query->store_result();
 $num_rows = $query->num_rows();
-$query->bind_result($id, $username, $hashed_password, $first_name, $last_name);
+$query->bind_result($id, $username, $first_name,$last_name,$username,$password, $email);
 $query->fetch();
 $response = [];
 if ($num_rows == 0) {

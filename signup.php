@@ -72,7 +72,7 @@ if (empty($email)) {
         $response['status'] = "failed";
     } else {
         $query = $mysqli->prepare('insert into users(first_name,last_name,username,password, email ) values(?,?,?,?,?)');
-        $query->bind_param('sssss', $first_name,$last_name,$username,$password, $email);
+        $query->bind_param('sssss', $first_name,$last_name,$username,$hashed_password, $email);
         $query->execute();
         $response['status'] = "success";
     }
